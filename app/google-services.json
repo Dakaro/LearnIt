@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "674759596102",
-    "project_id": "learnit-c71c4",
-    "storage_bucket": "learnit-c71c4.appspot.com"
+    "project_number": "1093814951114",
+    "project_id": "learnit-854ab",
+    "storage_bucket": "learnit-854ab.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:674759596102:android:cdb3d589fcfe425aa45247",
+        "mobilesdk_app_id": "1:1093814951114:android:f8564c6277d7fd02b4a833",
         "android_client_info": {
           "package_name": "com.example.learnit"
         }
       },
       "oauth_client": [
         {
-          "client_id": "674759596102-ls2faof4hq1l93g9fr4lo7hbp22n5nod.apps.googleusercontent.com",
+          "client_id": "1093814951114-fiqn6r2ef2vc4t3d2bhpcupb0i91la6l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.learnit",
+            "certificate_hash": "4e8ddb4cb7143e75fddd5d363597e285d4b27268"
+          }
+        },
+        {
+          "client_id": "1093814951114-rjcvm41u4if1flbuqpslv2q930eo9epp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAv606W4_aAos74ou08x3bj4eZiMjlC4Is"
+          "current_key": "AIzaSyA0MQhddD4lrU9V_Sy2-Oq6L4iRIJeBSdc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "674759596102-ls2faof4hq1l93g9fr4lo7hbp22n5nod.apps.googleusercontent.com",
+              "client_id": "1093814951114-rjcvm41u4if1flbuqpslv2q930eo9epp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

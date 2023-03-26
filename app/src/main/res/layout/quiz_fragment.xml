@@ -39,7 +39,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:text="Button"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:onClick="randWord"/>
 
             <Button
                 android:id="@+id/button2"
@@ -47,7 +48,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:text="Button"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:onClick="randWord"/>
 
         </LinearLayout>
 
@@ -65,7 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:text="Button"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:onClick="randWord"/>
 
             <Button
                 android:id="@+id/button4"
@@ -73,7 +76,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:text="Button"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:onClick="randWord"/>
 
         </LinearLayout>
 
