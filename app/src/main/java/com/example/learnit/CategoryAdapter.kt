@@ -16,16 +16,15 @@ class CategoryAdapter: RecyclerView.Adapter<MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        println(" wielkosc listy:  " + categoryList!!.size)
-        return categoryList!!.size
+        println(" wielkosc listy:  " + categoryList.size)
+        return categoryList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val title = holder.view.findViewById<TextView>(R.id.category_text_row)
 
-        title.text = categoryList!!.elementAt(position)
+        title.text = categoryList[position]
 
-        val position1 = position
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val activity = v!!.context as AppCompatActivity

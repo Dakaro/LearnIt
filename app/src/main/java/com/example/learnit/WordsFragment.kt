@@ -1,6 +1,7 @@
 package com.example.learnit
 
 import android.content.ContentValues
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,9 +16,7 @@ import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.android.synthetic.main.quiz_fragment.*
 import kotlinx.coroutines.newFixedThreadPoolContext
 import kotlinx.coroutines.runBlocking
-import logic.checkResult
-import logic.correctAns
-import logic.randWords
+import logic.*
 import kotlin.random.Random
 import kotlin.random.Random.Default.nextInt
 
@@ -25,6 +24,7 @@ var wordsList: MutableList< DocumentSnapshot > = mutableListOf()
 
 class WordsFragment(var myCategory: String): Fragment(){
 
+    var myAlgorithm: SortAlgorithm = randomSort()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,11 +43,14 @@ class WordsFragment(var myCategory: String): Fragment(){
         var button2 = view.findViewById<Button>(R.id.button2)
         var button3 = view.findViewById<Button>(R.id.button3)
         var button4 = view.findViewById<Button>(R.id.button4)
+        val hint = view.findViewById<TextView>(R.id.hint_text)
 
 
         fun setText() {
-            var tempList = randWords(wordsList)
-            title.text = tempList[correctAns].get("translation").toString()
+            var tempList = myAlgorithm.randWords(wordsList)
+            hint.visibility = View.INVISIBLE
+            hint.text = tempList[myAlgorithm.getCorrectAns()].get("desc").toString()
+            title.text = tempList[myAlgorithm.getCorrectAns()].get("translation").toString()
             button1.text = tempList[0].get("word").toString()
             button2.text = tempList[1].get("word").toString()
             button3.text = tempList[2].get("word").toString()
@@ -61,33 +64,49 @@ class WordsFragment(var myCategory: String): Fragment(){
             if (document != null) {
                 println(document.documents)
                 wordsList = document.documents
+
                 Log.d(ContentValues.TAG, "DocumentSnapshot data: ${document.documents}")
             } else {
                 Log.d(ContentValues.TAG, "No such document")
             }
 
-            setText()
-        }
-
-        button1.setOnClickListener {
-            if ( checkResult(0) ) {
+            if( wordsList.size > 4 ){
                 setText()
             }
         }
 
-        button2.setOnClickListener {
-            if ( checkResult(1) ) {
-                setText()
+        if( wordsList.size < 5 ){
+            Toast.makeText(context, "Not enough words! ${wordsList.size} of at least 5 ", Toast.LENGTH_LONG).show()
+            return view
+        } else {
+            button1.setOnClickListener {
+                if (myAlgorithm.checkResult(0)) {
+                    setText()
+                } else {
+                    hint.visibility = View.VISIBLE
+                }
             }
-        }
-        button3.setOnClickListener {
-            if ( checkResult(2) ) {
-                setText()
+
+            button2.setOnClickListener {
+                if (myAlgorithm.checkResult(1)) {
+                    setText()
+                } else {
+                    hint.visibility = View.VISIBLE
+                }
             }
-        }
-        button4.setOnClickListener {
-            if ( checkResult(3) ) {
-                setText()
+            button3.setOnClickListener {
+                if (myAlgorithm.checkResult(2)) {
+                    setText()
+                } else {
+                    hint.visibility = View.VISIBLE
+                }
+            }
+            button4.setOnClickListener {
+                if (myAlgorithm.checkResult(3)) {
+                    setText()
+                } else {
+                    hint.visibility = View.VISIBLE
+                }
             }
         }
 
@@ -97,21 +116,5 @@ class WordsFragment(var myCategory: String): Fragment(){
         super.onDestroy()
     }
 
-    fun setWords(): ArrayList< DocumentSnapshot > {
-
-        var result = arrayListOf<DocumentSnapshot>()
-
-        var myList = arrayListOf<Int>()
-
-        Toast.makeText(requireContext(), "tablica: " + myList.size.toString(), Toast.LENGTH_SHORT).show()
-
-        myList.forEach {
-            result.add( wordsList[it] )
-        }
-
-        println(myList)
-
-        return result
-    }
 
 }

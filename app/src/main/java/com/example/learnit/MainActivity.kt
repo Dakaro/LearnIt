@@ -14,7 +14,6 @@ import kotlinx.coroutines.runBlocking
 import kotlin.random.Random
 
 val db = Firebase.firestore
-var myAns: Int = -1
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,15 +23,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
+        supportActionBar?.setIcon(R.drawable.learnit)
+        supportActionBar?.setLogo(R.drawable.learnit)
+
         val bottomNav = findViewById<BottomNavigationView>(R.id.top_nav_menu)
 
         val categoryFragment = CategoryFragment()
         val addFragment = AddFragment()
         val accountFragment = AccountFragment()
 
-        runBlocking {
-            setFragment(categoryFragment)
-        }
+        setFragment(categoryFragment)
 
         bottomNav.setOnItemSelectedListener{
             when(it.itemId){
