@@ -72,12 +72,6 @@ class AddFragment(): Fragment(){
                 return@setOnClickListener
             }
 
-            println(
-                "TEXT: " + wordText + " " +
-                        translationText + " " +
-                        categoryText + " " +
-                        descText
-            )
 
             val newWord = WordModel(
                 wordText,

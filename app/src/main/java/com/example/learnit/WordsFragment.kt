@@ -20,9 +20,9 @@ import logic.*
 import kotlin.random.Random
 import kotlin.random.Random.Default.nextInt
 
-var wordsList: MutableList< DocumentSnapshot > = mutableListOf()
+class WordsFragment(wordsList: MutableList< DocumentSnapshot >): Fragment(){
 
-class WordsFragment(var myCategory: String): Fragment(){
+    var myWordsList = wordsList
 
     var myAlgorithm: SortAlgorithm = randomSort()
 
@@ -47,7 +47,7 @@ class WordsFragment(var myCategory: String): Fragment(){
 
 
         fun setText() {
-            var tempList = myAlgorithm.randWords(wordsList)
+            var tempList = myAlgorithm.randWords(myWordsList)
             hint.visibility = View.INVISIBLE
             hint.text = tempList[myAlgorithm.getCorrectAns()].get("desc").toString()
             title.text = tempList[myAlgorithm.getCorrectAns()].get("translation").toString()
@@ -57,28 +57,8 @@ class WordsFragment(var myCategory: String): Fragment(){
             button4.text = tempList[3].get("word").toString()
         }
 
-        val docRef = db.collection("users").document(auth.uid.toString()).collection( myCategory.toString() )
+        setText()
 
-        docRef.get().addOnSuccessListener { document ->
-
-            if (document != null) {
-                println(document.documents)
-                wordsList = document.documents
-
-                Log.d(ContentValues.TAG, "DocumentSnapshot data: ${document.documents}")
-            } else {
-                Log.d(ContentValues.TAG, "No such document")
-            }
-
-            if( wordsList.size > 4 ){
-                setText()
-            }
-        }
-
-        if( wordsList.size < 5 ){
-            Toast.makeText(context, "Not enough words! ${wordsList.size} of at least 5 ", Toast.LENGTH_LONG).show()
-            return view
-        } else {
             button1.setOnClickListener {
                 if (myAlgorithm.checkResult(0)) {
                     setText()
@@ -108,13 +88,11 @@ class WordsFragment(var myCategory: String): Fragment(){
                     hint.visibility = View.VISIBLE
                 }
             }
-        }
 
         return view
     }
     override fun onDestroy() {
         super.onDestroy()
     }
-
 
 }
